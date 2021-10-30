@@ -15,6 +15,7 @@ RUN mkdir /var/models
 RUN curl https://data.kb.se/datasets/2020/10/swedish_nlp/spacy/sv_pipeline-0.0.0.tar.gz -o /var/models/sv_pipeline.tar.gz
 RUN pip install /var/models/sv_pipeline.tar.gz
 RUN pip install spacy-transformers
+RUN rm /var/models/sv_pipeline.tar.gz
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
 # COPY requirements.txt /tmp/pip-tmp/
