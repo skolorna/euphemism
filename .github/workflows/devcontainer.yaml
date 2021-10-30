@@ -1,4 +1,4 @@
-name: Development Container
+name: Devcontainer
 
 on:
   push:
@@ -28,6 +28,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/build-push-action@v2
         with:
+          cache-from: type=registry,ref=ghcr.io/skolorna/euphemism-devcontainer:latest
           context: .devcontainer
           push: true
           tags: ${{ steps.meta.outputs.tags }}
