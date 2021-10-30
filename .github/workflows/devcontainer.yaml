@@ -28,5 +28,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/build-push-action@v2
         with:
+          context: .devcontainer
           push: true
           tags: ${{ steps.meta.outputs.tags }}
