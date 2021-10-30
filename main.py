@@ -1,25 +1,13 @@
-"""
-Hello World
-"""
 import spacy
 nlp = spacy.load("sv_pipeline")
 
-# with open("sample.txt", encoding="utf8") as sample:
-#     with open("output.txt", mode="w", encoding="utf8") as file:
-#         for line in sample:
-#             doc = nlp(line.rstrip())
-#             for token in doc:
-#                 file.write(f"{token.text} {token.pos_} {token.dep_}\n")
-
-#             file.write("\n")
-
-def rewrite(meal: str):
+def summarize(meal: str) -> str:
     doc = nlp(meal)
 
     for token in doc:
-        if token.pos_ == "NOUN":
-            print("got noun!")
-        print(token.text, token.pos_, token.dep_)
+        print(token.text, token.pos_, token.tag_)
 
-rewrite("Köttbullar, stuvade makaroner och grönsaker")
-rewrite("Köttbullar med makaroner och ketchup")
+if __name__ == "__main__":
+    with open("sample.txt", encoding="utf8") as file:
+        for line in file:
+            summarize(line.rstrip())

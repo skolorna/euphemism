@@ -9,13 +9,12 @@ ARG NODE_VERSION="none"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
 # Models
-RUN mkdir /var/models
 # RUN curl https://data.kb.se/datasets/2020/10/swedish_nlp/spacy/sv_model_upos.zip -o /var/models/upos.zip
 # RUN curl https://data.kb.se/datasets/2020/10/swedish_nlp/spacy/sv_model_xpos.zip -o /var/models/xpos.zip
-RUN curl https://data.kb.se/datasets/2020/10/swedish_nlp/spacy/sv_pipeline-0.0.0.tar.gz -o /var/models/sv_pipeline.tar.gz
-RUN pip install /var/models/sv_pipeline.tar.gz
-RUN pip install spacy-transformers
-RUN rm /var/models/sv_pipeline.tar.gz
+RUN curl https://data.kb.se/datasets/2020/10/swedish_nlp/spacy/sv_pipeline-0.0.0.tar.gz -o /tmp/sv_pipeline.tar.gz
+RUN pip3 install /tmp/sv_pipeline.tar.gz
+RUN pip3 install spacy-transformers
+RUN rm /tmp/sv_pipeline.tar.gz
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
 # COPY requirements.txt /tmp/pip-tmp/
