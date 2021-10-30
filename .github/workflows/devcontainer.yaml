@@ -1,0 +1,32 @@
+name: Development Container
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+      - id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            ghcr.io/skolorna/euphemism-devcontainer
+          tags: |
+            type=schedule
+            type=sha
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
