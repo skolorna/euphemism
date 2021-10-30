@@ -21,6 +21,8 @@ jobs:
           tags: |
             type=schedule
             type=sha
+          flavor: |
+            latest=true
       - uses: docker/login-action@v1
         with:
           registry: ghcr.io
